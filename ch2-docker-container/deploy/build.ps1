@@ -21,12 +21,18 @@ $BackendBase = "$Base\spring-hello"
 $FrontendDeployment = "$Base\deploy\vue-hello\hello\"
 $BackendDeployment = "$Base\deploy\spring-hello\hello.jar"
 
-"正在构建 vue-hello ..."
 Set-Location $FrontendBase
+
+Write-Host "正在下载前端包..."
+npm init > $null
+
+"正在构建 vue-hello ..."
 npm run build > $null
+
 if (Test-Path -Path $FrontendDeployment) {
   Remove-Item -Path $FrontendDeployment -Force -Recurse > $null
 }
+
 Move-Item -Path .\dist -Destination $FrontendDeployment > $null
 
 Write-Host "正在构建 spring-hello ..."
@@ -39,6 +45,7 @@ catch { Write-Host $Error }
 if (Test-Path -Path $BackendDeployment) {
   Remove-Item -Path $BackendDeployment
 }
+
 Move-Item -Path $BackendBase\target\spring-hello-0.0.1-SNAPSHOT.jar -Destination $BackendDeployment
 
 Set-Location $Base\deploy
