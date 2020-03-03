@@ -22,11 +22,10 @@ $FrontendDeployment = "$Base\deploy\vue-hello\hello\"
 $BackendDeployment = "$Base\deploy\spring-hello\hello.jar"
 
 Set-Location $FrontendBase
-
 Write-Host "正在下载前端包..."
-npm init > $null
+npm install
 
-"正在构建 vue-hello ..."
+Write-Host "正在构建 vue-hello ..."
 npm run build > $null
 
 if (Test-Path -Path $FrontendDeployment) {
