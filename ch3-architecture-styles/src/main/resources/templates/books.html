@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>Hexagonal Architecture Example: Book Store</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+
+<body>
+	<form th:action="@{/books}" method="post">
+		<label id="titleInput">书名：</label> <input type="text" name="title" />
+		<br />
+		<lable id="priceInput">价格：</lable>
+		<input type="number" name="price" /><br />
+		<button type="submit">添加</button>
+	</form>
+
+	<table>
+		<thead>
+			<tr>
+				<th>书名</th>
+				<th>价格</th>
+			</tr>
+		</thead>
+		<tbody>
+		<tr th:each="book: ${books}">
+		 <td th:text="${book.title}">book1</td>
+		 <td th:text="${book.price}">10</td>
+		</tr>
+		</tbody>
+	</table>
+</body>
+
+</html>
